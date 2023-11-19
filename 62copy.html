@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blood Bank Locator</title>
+    <style>
+       body {
+            background-color: #F5F5F5;
+            font-family: Arial, sans-serif;
+        
+        }
+
+        h1 {
+            color: #B22222;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #B22222;
+        }
+         input[type="text"],
+        button {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        input[type="text"] {
+            width: 300px;
+        }
+
+        button {
+            background-color: #B22222;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #800000;
+        }
+                  #result {
+            margin-top: 20px;
+        }
+
+        #result h3 {
+            color: #B22222;
+            margin-bottom: 10px;
+        }
+
+        #result p {
+            color: #333;
+        }
+          form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+    </style>
+    <script>
+        function searchBloodBank() {
+            var city = document.getElementById("city").value.toLowerCase();
+  var blood_bank_data = [
+                { city: "hyderabad", name: "Blood Bank 1", address: "Bhagyanagar Complex, RTC X Rd, near Sri Mayuri Theatre", phone: " 040 2766 7500" },
+                { city: "hyderabad", name: "Blood Bank 2", address: "Judges Colony, New Malakpet", phone: " 083415 55225" },
+                { city: "hyderabad", name: "Blood Bank 3", address: "Red Hills Rd, Red Hills, Lakdikapul", phone: "040 2330 0859" },
+                { city: "bangalore", name: "Blood Bank 1", address: "1st Main Rd, New Tharagupet",phone: "080 2670 0001"},
+                { city: "bangalore", name: "Blood Bank 2", address: "4th block Vasantha nagar", phone:"099007 77791" },
+                { city: "mysore", name: "Blood Bank 1", address: " Kalidasa Road, Jayalakshmipuram", phone:"570012" },
+                { city: "mysore", name: "Blood Bank 2", address: " Devaraja Mohalla, Shivarampet ", phone:" 0821 252 6230" },
+                { city: "ballari", name: "Blood Bank 1", address: " Parvathi Nagar ", phone:" 097012 53247 " },
+                { city: "ballari", name: "Blood Bank 2", address: " Satya Narayana Pet", phone:" 583101" },
+                { city: "hubbali", name: "Blood Bank 1 ", address: " Opp.BVB College, Vidya Nagar ", phone:"072044 11222" },
+                { city: "hubbali", name: "Blood Bank 2 ", address: "Vivekanand General Hospital Campus, Deshpande Nagar ", phone:"0836 236 6200" },
+                { city: "dharwad", name: "Blood Bank 1 ", address: "sukruth bulg opp kc park main gate, near panjurli hotel", phone:"0836 295 8444" },
+                { city: "dharwad", name: "Blood Bank 2 ", address: "  Kamalapur", phone:"0836 274 7747" },
+                { city: "shivamogga", name: "Blood Bank 1 ", address: " near Kottureshwars Hospital, Vinayaka Nagar, Basavanagudi", phone:"577201" },
+                { city: "shivamogga", name: "Blood Bank 2 ", address: "Tilak Nagar, Durgigudi ", phone:"081822 28855" },
+                { city: "chennai", name: "Blood Bank 1 ", address: "2nd floor, Church Street, 110, E Mada St, Royapuram", phone:"044 2596 5596" },
+                { city: "chennai", name: "Blood Bank 2 ", address: "SCHOOL OF OPTOMETRY, 130, Marshalls Rd, Egmore", phone:"044 2841 4949" },
+      
+      
+                // Add more blood bank data here
+            ];
+
+            var matches = blood_bank_data.filter(function (bank) {
+                return bank.city.toLowerCase() === city;
+            });
+
+            var resultContainer = document.getElementById("result");
+            resultContainer.innerHTML = "";
+
+            if (matches.length > 0) {
+                var title = document.createElement("h3");
+                title.textContent = "Blood banks found in " + city + ":";
+                resultContainer.appendChild(title);
+matches.forEach(function (bank) {
+                    var bankInfo = document.createElement("p");
+                    bankInfo.textContent = bank.name + " - Address: " + bank.address + " - Phone: " + bank.phone;
+                    resultContainer.appendChild(bankInfo);
+                });
+            } else {
+                var error = document.createElement("p");
+                error.textContent = "No blood banks found in " + city;
+                resultContainer.appendChild(error);
+            }
+        }
+    </script>
+   </head>
+<body>
+    <h1>Blood Bank Locator</h1>
+     <label for="bloodType">Select Blood Type:</label>
+    <select id="bloodType" name="bloodType">
+      <option value="A+">A+</option>
+      <option value="A-">A-</option>
+      <option value="B+">B+</option>
+      <option value="B-">B-</option>
+      <option value="O+">O+</option>
+      <option value="O-">O-</option>
+      <option value="AB+">AB+</option>
+      <option value="AB-">AB-</option>
+    </select>
+    
+
+    <label for="names">Check Avalilable City:</label>
+    <select id="bloodType" name="bloodType">
+      <option value="hyderabad">hyderabad</option>
+      <option value="bangalore">bangalore</option>
+      <option value="mysore">mysore</option>
+      <option value="hubbali">hubbali</option>
+      <option value="ballari">ballari</option>
+      <option value="dharwad">dharwad</option>
+      <option value="hivamogga">shivamogga</option>
+      <option value="chennai">chennai</option>
+    </select> 
+    
+
+    <label for="city">Enter city name:</label>
+    <input type="text" id="city" name="location" placeholder="Enter city name">
+    <button onclick="searchBloodBank()">Search</button>
+
+    <div id="result"></div>
+    
+</body>
+</html> 
